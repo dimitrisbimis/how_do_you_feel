@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotion Selector</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f0;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .emotion-button {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 1em;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .emotion-button:hover {
+      transform: scale(1.1);
+    }
+    .joy    { background-color: rgb(255, 192, 0); }
+    .sad    { background-color: rgb(0, 71, 171); }
+    .anger  { background-color: rgb(210, 4, 45); }
+    .love   { background-color: rgb(250, 160, 160); color: black; }
+    .calm   { background-color: rgb(167, 199, 231); color: black; }
+  </style>
+</head>
+<body>
+  <h1>Select an Emotion</h1>
+  <button class="emotion-button joy" onclick="sendEmotion('Joy')">Joy</button>
+  <button class="emotion-button sad" onclick="sendEmotion('Sadness')">Sadness</button>
+  <button class="emotion-button anger" onclick="sendEmotion('Anger')">Anger</button>
+  <button class="emotion-button love" onclick="sendEmotion('Love')">Love</button>
+  <button class="emotion-button calm" onclick="sendEmotion('Calm')">Calm</button>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    function sendEmotion(emotion) {
+      socket.emit('emotion', emotion);
+    }
+  </script>
+</body>
+</html>
